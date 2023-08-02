@@ -1,22 +1,51 @@
 package io.marceloaugustodev.rest.rest.controller;
 
+import io.marceloaugustodev.rest.domain.entities.Calculater;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/calculater")
 public class CalculaterController {
 
-    @GetMapping("/{number1}+{number2}")
-    public double soma(@PathVariable(value = "number1") double number1,
-                       @PathVariable(value = "number2") double number2){
+    private static Calculater calculater = new Calculater();
 
-        return number1 + number2;
+    @GetMapping("/{numberOne}+{numberTwo}")
+    public double soma(@PathVariable(value = "numberOne") double numberOne,
+                       @PathVariable(value = "numberTwo") double numberTwo){
+
+        return calculater.soma(numberOne,numberTwo);
     }
 
-    @GetMapping("/{number1}-{number2}")
-    public double subtracao(@PathVariable(value = "number1") double number1,
-                            @PathVariable(value = "number2") double number2){
+    @GetMapping("/{numberOne}-{numberTwo}")
+    public double subtracao(@PathVariable(value = "numberOne") double numberOne,
+                            @PathVariable(value = "numberTwo") double numberTwo){
 
-        return number1 - number2;
+        return calculater.subtracao(numberOne,numberTwo);
+    }
+
+    @GetMapping("/{numberOne}x{numberTwo}")
+    public double multiplic(@PathVariable(value = "numberOne") double numberOne,
+                            @PathVariable(value = "numberTwo") double numberTwo){
+
+        return calculater.multiplic(numberOne,numberTwo);
+    }
+
+    @GetMapping("/M({numberOne},{numberTwo})")
+    public double media(@PathVariable(value = "numberOne") double numberOne,
+                        @PathVariable(value = "numberTwo") double numberTwo){
+
+        return calculater.media(numberOne,numberTwo);
+    }
+
+    @GetMapping("/V{number}")
+    public double raiz(@PathVariable(value = "number") double number){
+        return calculater.raiz(number);
+    }
+
+    @GetMapping("/{numberOne}/{numberTwo}")
+    public double divisao(@PathVariable(value = "numberOne") double numberOne,
+                          @PathVariable(value = "numberTwo") double numberTwo){
+
+        return calculater.divid(numberOne,numberTwo);
     }
 }
